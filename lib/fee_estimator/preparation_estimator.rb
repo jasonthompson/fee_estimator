@@ -12,12 +12,13 @@ module FeeEstimator
       @minutes_per_page = minutes_per_page
     end
 
-    def estimate
-      preparation_time 
+    def estimate_pages_requiring_redaction
+      sample.pages_requiring_redaction_percentage.to_f * actual.page_count / 100
     end
 
-    def preparation_time
-      actual.pages_requiring_redaction
+    def estimate
+      estimate_pages_requiring_redaction * minutes_per_page / 60 * preparation_fee_per_hour
     end
-  end
+
+ end
 end
