@@ -1,3 +1,5 @@
+require 'duration'
+
 module FeeEstimator
   class Review
     attr_reader :unit, :size, :duration, :page_count, :pages_requiring_redaction
@@ -5,7 +7,7 @@ module FeeEstimator
     def initialize(args)
       @unit = args[:unit]
       @size = args[:size]
-      @time = args[:duration]
+      @duration = Duration.new(args[:duration])
       @page_count = set_page_count(args[:page_count])
       @pages_requiring_redaction = args[:pages_requiring_redaction]
     end

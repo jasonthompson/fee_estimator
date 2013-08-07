@@ -1,8 +1,9 @@
+require_relative './estimator'
 require_relative './fees'
 require_relative './calculations'
 
 module FeeEstimator
-  class SearchEstimator
+  class SearchEstimator < Estimator
     include FeeEstimator::Fees
     include FeeEstimator::Calculations
 
@@ -10,12 +11,10 @@ module FeeEstimator
                 :sample_page_count, 
                 :sample_duration
 
-    def initialize(sample,actual)
-      sample = sample
-      actual = actual
-      @actual_page_count = actual.page_count
-      @sample_page_count = sample.page_count
-      @sample_duration = sample.duration
+    def post_initialize(args)
+      @actual_page_count = args[:actual].page_count
+      @sample_page_count = args[:sample].page_count
+      @sample_duration = args[:sample].duration
     end
 
     def estimate

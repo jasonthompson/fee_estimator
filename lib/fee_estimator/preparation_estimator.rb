@@ -1,8 +1,9 @@
+require_relative "./estimator"
 require_relative "./fees"
 require_relative "./calculations"
 
 module FeeEstimator
-  class PreparationEstimator
+  class PreparationEstimator < Estimator
     include FeeEstimator::Fees
     include FeeEstimator::Calculations
 
@@ -10,13 +11,11 @@ module FeeEstimator
                 :sample_pages_requiring_redaction_percentage,
                 :actual_page_count
 
-    def initialize(sample,actual, minutes_per_page = 2)
-      sample = sample
-      actual = actual
+    def post_initialize(args)
       @sample_pages_requiring_redaction_percentage = 
-        sample.pages_requiring_redaction_percentage
-      @actual_page_count = actual.page_count
-      @minutes_per_page = minutes_per_page
+        args[:sample].pages_requiring_redaction_percentage
+      @actual_page_count = args[:actual].page_count
+      @minutes_per_page = 2
     end
 
 
@@ -34,7 +33,8 @@ module FeeEstimator
     end
     
     def estimate_pages_requiring_redaction
-      sample_pages_requiring_redaction_percentage.to_f * actual_page_count / 100
+      sample_pages_requiring_redaction_percentage * 
+        actual_page_count / 100
     end
 
     def estimate_duration
