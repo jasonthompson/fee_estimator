@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 require_relative '../../lib/fee_estimator/review'
 
-describe FeeEstimator::Review do
+describe FeeEstimator::ReviewFactory do
 
   sample_page_params = {:unit => :page, 
                         :size => 200, 
@@ -13,8 +13,8 @@ describe FeeEstimator::Review do
                          :page_count => 300, 
                          :pages_requiring_redaction => 40}
   
-  let(:pages_sample){FeeEstimator::Review.new(sample_page_params)}
-  let(:emails_sample){FeeEstimator::Review.new(sample_email_params)}
+  let(:pages_sample){FeeEstimator::ReviewFactory.new(sample_page_params)}
+  let(:emails_sample){FeeEstimator::ReviewFactory.new(sample_email_params)}
   
   describe :pages_per_unit do
     it "returns the pages per unit" do
@@ -24,12 +24,6 @@ describe FeeEstimator::Review do
     describe "when :unit = :pages" do
       it "is the same as size" do
         pages_sample.pages_per_unit.must_equal 1
-      end
-    end
-
-    describe :pages_requiring_redaction_percenatage do
-      it "returns percentage of pages requiring redaction" do
-        pages_sample.pages_requiring_redaction_percentage.must_equal 20
       end
     end
   end

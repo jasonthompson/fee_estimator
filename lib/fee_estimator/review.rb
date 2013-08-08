@@ -23,9 +23,5 @@ module FeeEstimator
     def pages_per_unit
       page_count / size.to_f
     end
-    
-    def pages_requiring_redaction_percentage
-      (pages_requiring_redaction.to_f / page_count * 100).to_i
-    end
   end
 end
