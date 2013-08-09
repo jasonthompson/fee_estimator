@@ -20,7 +20,7 @@ module FeeEstimator
 
 
     def estimate
-       to_hours(estimate_duration) * preparation_fee_per_hour
+       estimate_duration * preparation_fee_per_hour
     end
 
     def estimate_with_details
