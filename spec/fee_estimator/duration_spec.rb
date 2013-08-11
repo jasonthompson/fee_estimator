@@ -1,16 +1,33 @@
 require_relative '../spec_helper'
 require_relative '../../lib/fee_estimator/duration'
 
-describe FeeEstimator::Duration do
-  it "takes minutes and returns hours + minutes" do
-    FeeEstimator::Duration.new(400).to_hours.must_equal [6, 40]
-  end
+module FeeEstimator
 
-  describe :round do
-    it "rounds to the nearest 15 minutes" do
-      FeeEstimator::Duration.new(400).round.must_equal [6, 45]
-      FeeEstimator::Duration.new(125).round.must_equal [2, 15]
-      FeeEstimator::Duration.new(152).round.must_equal [2, 30]
+  describe Duration do
+    
+    subject { Duration.new(400) }
+
+    it "takes minutes and returns hours + minutes" do
+      dur = Duration.new(400)
+      dur.hours_minutes.must_equal [6, 40]
+    end
+
+    describe :to_hours_and_minutes_rounded do
+      it "rounds to the nearest 15 minutes" do
+        Duration.new(400).hours_minutes_rounded.must_equal [6, 45]
+        Duration.new(125).hours_minutes_rounded.must_equal [2, 15]
+        Duration.new(152).hours_minutes_rounded.must_equal [2, 30]
+      end
+    end
+
+    describe :* do
+      it "multiplies a duration by given number" do
+        (subject * 30).minutes.must_equal(12000)
+      end
+
+      it "returns a new instance of Duration" do
+        (subject * 30).must_be_instance_of Duration
+      end
     end
   end
 end

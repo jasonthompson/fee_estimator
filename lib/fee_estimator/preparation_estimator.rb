@@ -1,6 +1,7 @@
 require_relative "./estimator"
 require_relative "./fees"
 require_relative "./calculations"
+require_relative "./duration"
 
 module FeeEstimator
   class PreparationEstimator < Estimator
@@ -9,13 +10,15 @@ module FeeEstimator
 
     attr_reader :minutes_per_page,
                 :sample_pages_requiring_redaction_percentage,
-                :actual_page_count
+                :actual_page_count,
+                :duration_klass
 
     def post_initialize(args)
       @sample_pages_requiring_redaction_percentage = 
         args[:sample].pages_requiring_redaction_percentage
       @actual_page_count = args[:actual].page_count
       @minutes_per_page = 2
+      @duration_klass = Duration
     end
 
 
@@ -38,7 +41,8 @@ module FeeEstimator
     end
 
     def estimate_duration
-      estimate_pages_requiring_redaction * minutes_per_page
+      mins = estimate_pages_requiring_redaction * minutes_per_page
+      duration_klass.new(mins).to_f
     end
  end
 end
