@@ -12,7 +12,7 @@ module FeeEstimator
       dur.hours_minutes.must_equal [6, 40]
     end
 
-    describe :to_hours_and_minutes_rounded do
+    describe :hours_minutes_rounded do
       it "rounds to the nearest 15 minutes" do
         Duration.new(400).hours_minutes_rounded.must_equal [6, 45]
         Duration.new(125).hours_minutes_rounded.must_equal [2, 15]
@@ -27,6 +27,12 @@ module FeeEstimator
 
       it "returns a new instance of Duration" do
         (subject * 30).must_be_instance_of Duration
+      end
+    end
+
+    describe :hours do
+      it "returns hours as a float" do
+        subject.hours.must_equal 6.75
       end
     end
   end

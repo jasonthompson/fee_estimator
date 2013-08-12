@@ -1,6 +1,7 @@
 require_relative './estimator'
 require_relative './fees'
 require_relative './calculations'
+require_relative './duration'
 
 module FeeEstimator
   class SearchEstimator < Estimator
@@ -18,19 +19,18 @@ module FeeEstimator
     end
 
     def estimate
-      to_currency(to_hours(estimate_duration) * search_fee_per_hour)
+      estimate_duration.hours * search_fee_per_hour
     end
 
     def estimate_details
       {:fee => estimate, 
-       :total_minutes => estimate_duration,
-       :time_in_hours => to_hours(estimate_duration),
-       :duration => estimate_duration,
+       :time_in_hours => estimate_duration.hours,
+       :time_in_minutes => estimate_duration.minutes,
        :fee_per_hour => preparation_fee_per_hour}
     end
 
     def estimate_duration
-      actual_page_count / sample_page_count.to_f * sample_duration
+      Duration.new(sample_duration * (actual_page_count / sample_page_count))
     end
   end
 end

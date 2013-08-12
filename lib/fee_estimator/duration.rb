@@ -14,11 +14,6 @@ module FeeEstimator
     def hours_minutes_rounded
       [fetch_hours, round_minutes]
     end
-
-    def self
-      self.minutes
-    end
-
     def *(number)
       Duration.new(minutes * number)
     end
@@ -27,6 +22,10 @@ module FeeEstimator
       fetch_hours + round_minutes / 60.0
     end
 
+    def hours
+      to_f
+    end
+   
     private 
 
     def fetch_minutes
