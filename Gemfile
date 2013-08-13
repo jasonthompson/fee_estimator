@@ -13,4 +13,4 @@ group :development do
   end
 end
 
-gem 'ruby-duration'
+gem 'OptionParser'
