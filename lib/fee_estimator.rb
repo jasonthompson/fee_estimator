@@ -1,47 +1,41 @@
 require_relative 'fee_estimator/search_estimator'
 require 'ostruct'
-require 'optparse'
+require 'main'
 
 module FeeEstimator
   class Exec
-    def self.parse(args)
-      options = {}
+    Main {
+     
+      keyword('page_count'){
+        cast :int
+        defaults 300
+      }
+      keyword('duration'){
+        cast :int
+        defaults 30
+      }
+      keyword('pages_requiring_redaction'){
+        cast :int
+      }
+      keyword('actual_page_count'){
+        cast :int
+      }
+      def run
+        sample_review = OpenStruct.new(size: params['page_count'].value,
+                                       unit: :page,
+                                       duration: params['duration'].value,
+                                       pages_requiring_redaction: params['pages_requiring_redaction'].value,
+                                       page_count: 300)
 
-      opt_parser = OptionParser.new do |opts|
-        opts.banner = "Usage: fee_estimator [options]"
+        actual_review = OpenStruct.new(size: params['actual_page_count'].value,
+                                       unit: :page,
+                                       page_count: 1000)
 
-        opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
-          options[:verbose] = v
-        end
-      end 
-      
-      opt_parser.parse!(args)
-      options
-    end
-    
+        estimate = FeeEstimator::SearchEstimator.new(:sample => sample_review, :actual => actual_review)
+
+        p estimate.estimate
+      end
+    }
   end
 end
-
-options = FeeEstimator::Exec.parse(ARGV)
-
-sample_review = OpenStruct.new(size: 200, 
-                               unit: :page, 
-                               page_count: 300, 
-                               duration: 30, 
-                               pages_per_unit: 1.5, 
-                               pages_requiring_redaction: 40)
-
-actual_review = OpenStruct.new(size: 1000, 
-                               unit: :page, 
-                               page_count: 1000)
-
-fe = FeeEstimator::SearchEstimator.new(:sample => sample_review,
-                                       :actual => actual_review)
-details = fe.estimate_details
-
-details.each do |detail|
-  k,v = detail
-  p "#{k} = #{v}"
-end
-p ARGV
 
