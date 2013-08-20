@@ -1,4 +1,6 @@
 require_relative 'search_estimator'
+require_relative 'preparation_estimator'
+require_relative 'reporter'
 require_relative 'review_factory'
 require 'ostruct'
 require 'main'
@@ -29,11 +31,16 @@ module FeeEstimator
 
         actual = ReviewFactory.create(:size => params['actual_page_count'].value)
 
-        estimate = FeeEstimator::SearchEstimator.new(:sample => sample, 
-                                                     :actual => actual)
+        search = FeeEstimator::SearchEstimator.new(:sample => sample, 
+                                                   :actual => actual)
 
-        e = sprintf("%.2f", estimate.estimate)
-        p "$" + e
+        preparation = FeeEstimator::PreparationEstimator.new(:sample => sample,
+                                                             :actual => actual)
+        
+
+        FeeEstimator::Reporter.new(search).total
+        FeeEstimator::Reporter.new(preparation).total
+
       end
     }
   end
