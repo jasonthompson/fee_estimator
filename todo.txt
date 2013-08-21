@@ -1,0 +1,4 @@
+*templates*
+-decide how to handle different types of estimates
+--Reporter could take a number of estimates, or
+--There could be specialized reporters and a specialized reporter can call other specialized reporters

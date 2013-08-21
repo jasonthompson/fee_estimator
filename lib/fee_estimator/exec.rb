@@ -1,6 +1,6 @@
 require_relative 'search_estimator'
 require_relative 'preparation_estimator'
-require_relative 'reporter'
+require_relative 'search_reporter'
 require_relative 'review_factory'
 require 'ostruct'
 require 'main'
@@ -36,10 +36,9 @@ module FeeEstimator
 
         preparation = FeeEstimator::PreparationEstimator.new(:sample => sample,
                                                              :actual => actual)
-        
 
-        FeeEstimator::Reporter.new(search).total
-        FeeEstimator::Reporter.new(preparation).total
+        FeeEstimator::SearchReporter.new(search).total
+        #FeeEstimator::Reporter.new(preparation).total
 
       end
     }
