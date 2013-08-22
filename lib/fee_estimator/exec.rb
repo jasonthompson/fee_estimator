@@ -37,7 +37,7 @@ module FeeEstimator
         preparation = FeeEstimator::PreparationEstimator.new(:sample => sample,
                                                              :actual => actual)
 
-        FeeEstimator::SearchReporter.new(search).total
+        FeeEstimator::Reporter.new(search).render
         #FeeEstimator::Reporter.new(preparation).total
 
       end

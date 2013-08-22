@@ -1,1 +1,2 @@
-"Search total: " <% search.total %>
+Search total:  <%= as_currency(search[:total]) %>
+(<%= search[:time_in_hours] %> hours x <%= as_currency(search[:fee_per_hour]) %> per hour)

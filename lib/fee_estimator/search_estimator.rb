@@ -23,9 +23,9 @@ module FeeEstimator
     end
 
     def estimate_details
-      {:fee => estimate, 
+      {:total => estimate, 
+       :page_count => actual_page_count,
        :time_in_hours => estimate_duration.hours,
-       :time_in_minutes => estimate_duration.minutes,
        :fee_per_hour => preparation_fee_per_hour}
     end
 
