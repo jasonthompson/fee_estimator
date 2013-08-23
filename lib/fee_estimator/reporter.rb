@@ -2,15 +2,15 @@ require "erb"
 
 module FeeEstimator
   class Reporter
-    attr_reader :template, :search_estimate
+    attr_reader :template, :estimate, :template_name
 
-    def initialize(estimate)
+    def initialize(estimate, template_name)
+      @template_name = template_name
       @template = ERB.new(get_template)
-      @search_estimate = estimate.estimate_details
+      @estimate = estimate.estimate_details
     end
 
     def render
-      search = search_estimate
       puts template.result(binding)
     end
 
@@ -20,9 +20,12 @@ module FeeEstimator
 
     private
 
+    def template_file
+      File.expand_path("templates/" + template_name.to_s + ".erb")
+    end
+
     def get_template
-      filename = File.expand_path("templates/text.erb")
-      File.open(filename, 'rb') { |f| f.read }
+      File.open(template_file, 'rb') { |f| f.read }
     end
   end
 end

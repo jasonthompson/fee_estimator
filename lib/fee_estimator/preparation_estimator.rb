@@ -26,11 +26,10 @@ module FeeEstimator
        estimate_duration * preparation_fee_per_hour
     end
 
-    def estimate_with_details
-      {:fee => estimate.round(2), 
+    def estimate_details
+      {:total => estimate.round(2), 
        :minutes_per_page => minutes_per_page,
-       :total_minutes => estimate_duration,
-       :time_in_hours => to_hours(estimate_duration),
+       :time_in_hours => estimate_duration,
        :duration => estimate_duration,
        :fee_per_hour => preparation_fee_per_hour}
     end

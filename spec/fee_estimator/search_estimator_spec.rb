@@ -30,9 +30,8 @@ describe FeeEstimator::SearchEstimator do
 
   describe :estimate_details do
     it "returns the calculation details of the estimate" do
-      details = {:fee=>45.00, 
+      details = {:total=>45.00, 
                  :time_in_hours=>1.5, 
-                 :time_in_minutes=>90.0, 
                  :fee_per_hour=>30.0}
       subject.estimate_details.must_equal details
     end
