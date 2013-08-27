@@ -1,9 +1,9 @@
-require_relative 'search_estimator'
-require_relative 'preparation_estimator'
-require_relative 'search_reporter'
-require_relative 'review_factory'
 require 'ostruct'
 require 'main'
+require 'fee-estimator/search_estimator'
+require 'fee-estimator/preparation_estimator'
+require 'fee-estimator/reporter'
+require 'fee-estimator/review_factory'
 
 
 module FeeEstimator

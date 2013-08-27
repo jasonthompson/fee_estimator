@@ -1,8 +1,3 @@
-require_relative "./estimator"
-require_relative "./fees"
-require_relative "./calculations"
-require_relative "./duration"
-
 module FeeEstimator
   class PreparationEstimator < Estimator
     include FeeEstimator::Fees

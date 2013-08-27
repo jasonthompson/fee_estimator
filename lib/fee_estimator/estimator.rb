@@ -1,3 +1,6 @@
+require 'fee_estimator/duration'
+require 'fee_estimator/fees'
+
 module FeeEstimator
   class Estimator
     attr_reader :sample, :actual
