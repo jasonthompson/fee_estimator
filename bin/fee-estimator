@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-# The command line Fee Estimator.
-
-require_relative 'fee_estimator/exec.rb'
-
-include Exec
-

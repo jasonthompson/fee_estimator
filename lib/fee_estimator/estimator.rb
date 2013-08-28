@@ -1,5 +1,3 @@
-require 'fee_estimator/duration'
-require 'fee_estimator/fees'
 
 module FeeEstimator
   class Estimator

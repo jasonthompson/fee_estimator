@@ -1,3 +1,2 @@
-require 'fee_estimator/estimator'
-
+require 'fee_estimator/exec'
 

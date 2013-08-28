@@ -1,5 +1,5 @@
 require_relative '../spec_helper'
-require_relative '../../lib/fee_estimator/search_estimator'
+require 'fee_estimator/search_estimator'
 require 'ostruct'
 
 describe FeeEstimator::SearchEstimator do

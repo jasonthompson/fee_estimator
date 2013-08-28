@@ -1,7 +1,10 @@
+require 'fee_estimator/estimator'
+require 'fee_estimator/duration'
+require 'fee_estimator/fees'
+
 module FeeEstimator
   class PreparationEstimator < Estimator
     include FeeEstimator::Fees
-    include FeeEstimator::Calculations
 
     attr_reader :minutes_per_page,
                 :sample_pages_requiring_redaction_percentage,

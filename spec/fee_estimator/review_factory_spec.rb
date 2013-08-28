@@ -1,5 +1,5 @@
 require_relative '../spec_helper'
-require_relative '../../lib/fee_estimator/review_factory'
+require 'fee_estimator/review_factory'
 
 describe FeeEstimator::ReviewFactory do
 

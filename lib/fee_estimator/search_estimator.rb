@@ -1,7 +1,11 @@
+require 'fee_estimator/estimator'
+require 'fee_estimator/duration'
+require 'fee_estimator/fees'
+
+
 module FeeEstimator
   class SearchEstimator < Estimator
     include FeeEstimator::Fees
-    include FeeEstimator::Calculations
 
     attr_reader :actual_page_count, 
                 :sample_page_count, 

@@ -6,6 +6,8 @@ group :development do
   gem 'minitest'
   gem 'guard-minitest'
   gem 'minitest-reporters'
+  gem 'simplecov'
+  gem 'simplecov-gem-adapter'
   require 'rbconfig'
   if RbConfig::CONFIG['target_os'] =~ /mswin|mingw/i
      gem 'wdm', '>= 0.1.0' 
@@ -13,5 +15,4 @@ group :development do
   end
 end
 
-gem 'OptionParser'
 gem 'main'

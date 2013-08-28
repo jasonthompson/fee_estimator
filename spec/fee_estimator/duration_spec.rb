@@ -1,5 +1,5 @@
 require_relative '../spec_helper'
-require_relative '../../lib/fee_estimator/duration'
+require 'fee_estimator/duration'
 
 module FeeEstimator
 

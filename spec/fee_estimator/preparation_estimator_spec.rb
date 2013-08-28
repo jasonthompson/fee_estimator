@@ -1,5 +1,6 @@
 require_relative '../spec_helper'
-require_relative '../../lib/fee_estimator/preparation_estimator'
+require 'fee_estimator/preparation_estimator'
+
 require 'ostruct'
 
 describe FeeEstimator::PreparationEstimator do
