@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "fee_estimator"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["jasonthompson"]
   spec.email         = ["jason@jthompson.ca"]
   spec.description   = %q{Calculates the fee estimates permitted for Freedom of Information requests in Ontario.}
@@ -19,8 +19,7 @@ Gem::Specification.new do |spec|
 			"lib/fee_estimator/duration.rb",
 			"lib/fee_estimator/exec.rb",
 			"lib/fee_estimator/preparation_estimator.rb",
-			"lib/fee_estimator/review_factory.rb",
-			"lib/fee_estimator/search_reporter.rb"]
+			"lib/fee_estimator/review_factory.rb"]
   spec.executables   = ["fee_estimator"]
   spec.require_paths = ["lib"]
 
